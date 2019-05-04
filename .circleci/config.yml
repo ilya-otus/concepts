@@ -1,0 +1,25 @@
+global: &global
+    environment:
+        MAJOR_VERSION: 0
+        MINOR_VERSION: 0
+        PROJECT_NAME: concepts
+    docker:
+        - image: podshivalovilya/cppbuilder:latest
+    working_directory: /usr/local/src
+
+version: 2
+jobs:
+    build:
+        <<: *global
+        steps:
+            - checkout
+            - run:
+                name: "CMake project"
+                command: "cmake ."
+            - run:
+                name: "Building"
+                command: "cmake --build ."
+    version: 2
+    build:
+        jobs:
+            - build
